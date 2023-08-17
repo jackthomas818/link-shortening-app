@@ -4,7 +4,7 @@
 
 Simply run:
 
-`docker compose up --build`
+    docker compose up --build
 
 
 ## Approach
@@ -23,7 +23,7 @@ I assumed that we have a working database that can store links with code (the ha
 
 ## Decision-making and problem-solving
 
-I considered using express.js or Django, but decided to use Flask because it's what I know, and it's a good fit for the simple microservice problem. I wanted the microservice to be as simple as possible so that it's easily maintainable and reliable, as well as scalable using docker. An MVC (Model View Controller) structure allows for separation of concerns with controllers, routes, services, and models as well as the main app.py. This also allows for testing of each component. The layout is also easy to understand for onboarding new members.
+I considered using Express.js or Django, but decided to use Flask because it's what I know, and it's a good fit for the simple microservice problem. I wanted the microservice to be as simple as possible so that it's easily maintainable and reliable, as well as scalable using docker. An MVC (Model View Controller) structure allows for separation of concerns with controllers, routes, services, and models as well as the main app.py. This also allows for testing of each component. The layout is also easy to understand for onboarding new members.
 
 Flask blueprints allow us to organize our API by encapsulating functionality. This allows separation of concerns as we are making the API more modular. 
 For generating the short URLs, I decided to use hashlib. This is the most straightforward way to convert a long URL into a hash, and then use base64 encoding to turn the hash into an alphanumeric string which we can shorten to whatever length we decide. I decided to use a default value of 8 digits for ~218 trillion possible values using alphanumeric characters.
