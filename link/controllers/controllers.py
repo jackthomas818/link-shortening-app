@@ -5,7 +5,7 @@ link_blueprint = Blueprint("link", __name__)
 link_service = LinkService()
 
 
-@link_blueprint.route("/shorten", method=["POST"])
+@link_blueprint.route("/shorten", methods=["POST"])
 def shorten_link():
     data = request.json
     long_url = data.get("long_url")
