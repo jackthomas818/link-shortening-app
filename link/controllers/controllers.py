@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from services.services import LinkService
+from link.services.services import LinkService
 
 link_blueprint = Blueprint("link", __name__)
 link_service = LinkService()

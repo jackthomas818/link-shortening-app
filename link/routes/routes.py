@@ -1,4 +1,4 @@
-from controllers.controllers import shorten_link
+from link.controllers.controllers import shorten_link
 from flask import Blueprint
 
 link_blueprint = Blueprint("link", __name__)
