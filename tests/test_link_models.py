@@ -1,4 +1,4 @@
-from models.models import Link
+from link.models.models import Link
 
 
 def test_link_model():

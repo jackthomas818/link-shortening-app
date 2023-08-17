@@ -1,4 +1,4 @@
-from services.services import LinkService
+from link.services.services import LinkService
 
 
 def test_generate_short_url():

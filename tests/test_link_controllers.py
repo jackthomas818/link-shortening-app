@@ -1,6 +1,6 @@
 from flask import Flask
 import pytest
-from controllers.controllers import link_blueprint
+from link.controllers.controllers import link_blueprint
 
 
 @pytest.fixture
