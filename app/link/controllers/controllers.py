@@ -8,11 +8,31 @@ link_service = LinkService()
 
 @link_blueprint.route("/shorten", methods=["POST"])
 def shorten_link():
-    data = request.json
-    long_url = data.get("long_url")
+    """
+    This function shortens a long URL and return the result as a JSON response.
 
-    link = link_service.generate_shorten_url(long_url)
+    This route accepts a POST request containing a JSON object with a "long_url" field.
+    The long URL is passed to the LinkService to generate a shortened URL.
 
-    response = jsonify(link.__dict__)
+    Returns:
+        Response: A JSON response containing the shortened URL information and a status code
+    """
+    try:
+        data = request.json
 
-    return response, 201
+        # Access the original long URL
+        long_url = data.get("long_url")
+
+        if not long_url:
+            return jsonify({"error": "Missing or empty 'long_url' field"}), 400
+
+        # Get a Link instance using LinkService
+        link = link_service.generate_shorten_url(long_url)
+
+        # Extract the Link instance information as a JSON
+        response = jsonify(link.__dict__)
+
+        return response, 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

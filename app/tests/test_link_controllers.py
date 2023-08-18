@@ -22,3 +22,12 @@ def test_shorten_link(client):
 
     assert response.status_code == 201
     assert "short_url" in response.json
+
+
+def test_shorten_link_missing(client):
+    # Simulate an HTTP POST request
+    data = {"long_url": ""}
+
+    response = client.post("/link/shorten", json=data)
+
+    assert response.status_code == 400
