@@ -6,12 +6,17 @@ Simply run:
 
     docker compose up --build
 
+## Testing the app
+
+Run the full test suite:
+
+    pytest
 
 ## Approach
 
 I started out by researching how link shortening services such as bit.ly generally work, and how I can contextualize the problem as a microservice implementation. To complete the exercise in a reasonable timeframe, I decided to limit the scope to just the link-shortening functionality and assumed that we had a working database and redirecting service that would complete the overall objective of providing shortened URLs.
 
-The microservice will expose a RESTful API that takes a long URL as input and returns a shortened URL. The API will be written using Flask, a lightweight framework for writing RESTful APIs in Python. 
+The microservice will expose a RESTful API that takes a long URL as input and returns a shortened URL. The API will be written using Flask, a lightweight framework for writing RESTful APIs in Python. Simple unit testing will also be implemented using pytest.
 
 A simple UI allows a QA tester to input long URLs and receive the shortened URL from the API. The UI will be as simple and lightweight as possible, using vanilla JavaScript and HTML. 
 
