@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
 from link.routes.routes import link_blueprint
-from ui.views import ui_blueprint
+from ui.routes.routes import ui_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(link_blueprint, url_prefix="/link")
-app.register_blueprint(ui_blueprint, url_prefix="/")
+app.register_blueprint(ui_blueprint, url_prefix="/ui")
 
 # Configure allowed origins in production environment.
 CORS(app)
