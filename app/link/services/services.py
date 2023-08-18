@@ -1,6 +1,6 @@
 import hashlib
 
-from models.models import Link
+from link.models.models import Link
 
 
 class LinkService:
