@@ -1,4 +1,6 @@
 import hashlib
+import random
+import string
 
 from link.models.models import Link
 
@@ -24,11 +26,13 @@ class LinkService:
         if not long_url:
             raise ValueError("Long URL cannot be empty")
 
-        # Calculate the hash of the long URL using SHA-512 algorithm
-        hash_object = hashlib.sha512(long_url.encode())
-
-        # Extract a substring of the hash to create the short URL code
-        code = hash_object.hexdigest()[0:n_digits]
+        # Generate a random alphanumeric (lower and upper case letters and numbers) string
+        code = "".join(
+            random.choice(
+                string.ascii_uppercase + string.ascii_lowercase + string.digits
+            )
+            for _ in range(n_digits)
+        )
 
         # Build the complete short URL using the generated code
         short_url = f"https://pa.ni/{code}"
