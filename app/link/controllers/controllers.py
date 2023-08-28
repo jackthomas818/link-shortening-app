@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect
 
 from link.link import link_blueprint
 from link.services.services import LinkService
@@ -6,7 +6,7 @@ from link.services.services import LinkService
 link_service = LinkService()
 
 
-@link_blueprint.route("/shorten", methods=["POST"])
+@link_blueprint.route("/shorten/", methods=["POST"])
 def shorten_link():
     """
     This function shortens a long URL and return the result as a JSON response.
@@ -37,5 +37,18 @@ def shorten_link():
 
         return response, 201
 
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@link_blueprint.route("/<code>", methods=["GET"])
+def redirect_link(code):
+    try:
+        link = link_service.get_link(code)
+
+        if link.long_url:
+            return redirect(link.long_url)
+        else:
+            return jsonify({"error": "URL not found in database"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500

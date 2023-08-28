@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (longUrl) {
             try {
-                const response = await fetch("http://localhost:5000/link/shorten", {
+                const response = await fetch("http://localhost:5000/shorten/", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

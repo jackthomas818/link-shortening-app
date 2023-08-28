@@ -34,7 +34,7 @@ class LinkService:
         code = self.encode(rows + 1)
 
         # Build the complete short URL using the generated code
-        short_url = f"https://pa.ni/{code}"
+        short_url = f"http://localhost:5000/{code}"
 
         # Return a Link instance with the new information
         return Link(id=code, long_url=long_url, short_url=short_url)
@@ -55,3 +55,6 @@ class LinkService:
             encoding += map[p]
             id = id // 62
         return encoding
+
+    def get_link(self, code):
+        return Link.query.filter_by(id=code).first()
