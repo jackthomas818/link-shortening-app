@@ -28,4 +28,8 @@ def create_app(config_name=Config):
     # Configure allowed origins in production environment.
     CORS(app)
 
+    @app.route("/")
+    def root():
+        return redirect(url_for("ui.index"))
+
     return app
