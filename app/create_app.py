@@ -22,15 +22,10 @@ def create_app(config_name=Config):
     from link.routes.routes import link_blueprint
     from ui.routes.routes import ui_blueprint
 
-    app.register_blueprint(link_blueprint, url_prefix="/link")
+    app.register_blueprint(link_blueprint, url_prefix="/")
     app.register_blueprint(ui_blueprint, url_prefix="/ui")
 
     # Configure allowed origins in production environment.
     CORS(app)
-
-    # Redirect root URL to /ui
-    @app.route("/")
-    def root():
-        return redirect(url_for("ui.index"))
 
     return app
