@@ -11,14 +11,12 @@ class LinkService:
     A class responsible for generating shortened URLs from long URLs.
     """
 
-    def generate_shorten_url(self, long_url, n_digits=8):
+    def generate_shorten_url(self, long_url):
         """
         Generate a shortened URL for a given long URL.
 
         Args:
             long_url (str): The long URL to be shortened.
-            n_digits (int, optional): The number of digits to use for the shortened URL code.
-                                     Default is 8.
 
         Returns:
             Link: A Link instance containing the shortened URL.
