@@ -2,6 +2,7 @@ import hashlib
 import random
 import string
 
+from extensions import db
 from link.models.models import Link
 
 
@@ -26,18 +27,31 @@ class LinkService:
         if not long_url:
             raise ValueError("Long URL cannot be empty")
 
-        # Generate a random alphanumeric (lower and upper case letters and numbers) string
-        code = "".join(
-            random.choice(
-                string.ascii_uppercase + string.ascii_lowercase + string.digits
-            )
-            for _ in range(n_digits)
-        )
+        # Get number of rows in database
+        rows = db.session.query(Link).count()
+
+        # Generate a base62 representation of the number of rows + 1 in the database
+        code = self.encode(rows + 1)
 
         # Build the complete short URL using the generated code
         short_url = f"https://pa.ni/{code}"
 
         # Return a Link instance with the new information
-        Link(id=code, long_url=long_url, short_url=short_url)
-
         return Link(id=code, long_url=long_url, short_url=short_url)
+
+    def save_link(self, Link):
+        db.session.add(Link)
+        db.session.commit()
+
+    def encode(self, id):
+        """
+        Encodes an integer to a base62 representation
+        """
+        map = string.digits + string.ascii_letters
+        encoding = ""
+        # Convert Base-62
+        while id > 0:
+            p = id % 62
+            encoding += map[p]
+            id = id // 62
+        return encoding
