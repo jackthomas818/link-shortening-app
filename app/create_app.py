@@ -2,8 +2,6 @@ from config import Config
 from extensions import db
 from flask import Flask, redirect, url_for
 from flask_cors import CORS
-from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
 
 
 def create_app(config_name=Config):
@@ -12,8 +10,13 @@ def create_app(config_name=Config):
     # Load the configuration based on the provided config_name
     app.config.from_object(config_name)
 
-    # Initialize extensions with the app
-    db.init_app(app)
+    # Database initialization
+    from link.models.models import Link
+
+    with app.app_context():
+        db.init_app(app)
+        db.drop_all()
+        db.create_all()
 
     # Import and register blueprints here
     from link.routes.routes import link_blueprint

@@ -2,6 +2,7 @@ import hashlib
 import random
 import string
 
+from extensions import db
 from link.models.models import Link
 
 
@@ -41,4 +42,5 @@ class LinkService:
         return Link(id=code, long_url=long_url, short_url=short_url)
 
     def save_link(self, Link):
-        pass
+        db.session.add(Link)
+        db.session.commit()

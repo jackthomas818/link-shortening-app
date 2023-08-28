@@ -36,14 +36,16 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
-# Switch to the non-privileged user to run the application.
-USER appuser
-
 # Copy the source code into the container.
 COPY . .
 
 # Expose the port that the application listens on.
 EXPOSE 5000
 
+ENV FLASK_APP=app.py
+ENV FLASK_DEBUG=1
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_ENV=development 
+
 # Run the application.
-CMD python app.py
+CMD flask run
