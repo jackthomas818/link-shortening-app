@@ -38,6 +38,7 @@ class LinkService:
         short_url = f"https://pa.ni/{code}"
 
         # Return a Link instance with the new information
-        Link(id=code, long_url=long_url, short_url=short_url)
-
         return Link(id=code, long_url=long_url, short_url=short_url)
+
+    def save_link(self, Link):
+        pass

@@ -29,8 +29,11 @@ def shorten_link():
         # Get a Link instance using LinkService
         link = link_service.generate_shorten_url(long_url)
 
+        # Save the link in the database
+        link_service.save_link(link)
+
         # Extract the Link instance information as a JSON
-        response = jsonify(link.__dict__)
+        response = jsonify(link)
 
         return response, 201
 

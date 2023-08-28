@@ -1,19 +1,14 @@
-class Link:
+from extensions import db
+from dataclasses import dataclass
+
+
+@dataclass
+class Link(db.Model):
     """
     A Class containing link information
 
     """
 
-    def __init__(self, id, long_url, short_url):
-        """
-        Initialize a Link instance
-
-        Args:
-            id (str): The unique identifier for the shortened URL.
-            long_url (str): The original long URL.
-            short_url (str): The generated shortened URL.
-
-        """
-        self.id = id
-        self.long_url = long_url
-        self.short_url = short_url
+    id: str = db.Column(db.String(150), primary_key=True)
+    long_url: str = db.Column(db.String(255))
+    short_url: str = db.Column(db.String(255))
